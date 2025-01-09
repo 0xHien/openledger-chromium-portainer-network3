@@ -44,7 +44,31 @@ cd /home/openledger/.config/opl
 
 # 启动 Docker Compose 项目
 echo "启动 Docker Compose 项目..."
-docker-compose up -d
+# docker-compose up -d
+
+
+docker run -d \
+  --name worker \
+  -p 8081:8080 \
+  -p 5555:5555 \
+  -v ./config.yaml:/app/config.yaml \
+  -v ./keystore/keystore.json:/app/keystore.json \
+  -v /etc/machine-id:/etc/machine-id \
+  --env-file .env \
+  --restart always \
+  --network worker-network \
+  openledgerhub/worker:1.0.0
+
+# 启动 scraper 服务
+docker run -d \
+  --name scraper \
+  -p 8000:8000 \
+  -e PYTHONUNBUFFERED=1 \
+  --restart always \
+  --network worker-network \
+  --link worker \
+  openledgerhub/scraper:1.0.0
+
 
 sleep 5
 # 设置定时任务
