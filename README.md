@@ -1,5 +1,4 @@
-# openledger-chromium-portainer-network3
-
+# 一键安装openledger chromium portainer network3教程
 1.下载到服务器
 ```wget https://raw.githubusercontent.com/0xHien/openledger-chromium-portainer-network3/refs/heads/main/setup.sh```
 
