@@ -7,4 +7,4 @@
 ```chmod +x setup.sh```
 
 3.执行
-```. ./setup.sh```
+```./setup.sh```
