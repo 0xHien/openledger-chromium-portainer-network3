@@ -47,6 +47,19 @@ echo "启动 Docker Compose 项目..."
 # docker-compose up -d
 
 
+# 检查 Docker 网络是否存在
+NETWORK_NAME="worker-network"
+NETWORK_EXISTS=$(docker network ls --filter name="^${NETWORK_NAME}$" -q)
+
+if [ -z "$NETWORK_EXISTS" ]; then
+    echo "网络 $NETWORK_NAME 不存在，正在创建..."
+    docker network create $NETWORK_NAME
+    echo "网络 $NETWORK_NAME 创建成功。"
+else
+    echo "网络 $NETWORK_NAME 已存在。"
+fi
+sleep 5
+
 docker run -d \
   --name worker \
   -p 8081:8080 \
