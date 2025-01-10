@@ -5,6 +5,7 @@ echo "一键安装openledger chromium portainer network3 "
 echo "                                              "
 echo "        =============================         "
 echo "               By   Hien                      "
+echo "             X/推特：@Hienkkkk                 "
 echo "=============================================="
 
 set -e  # 如果有错误立即退出
