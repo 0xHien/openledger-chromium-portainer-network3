@@ -1,0 +1,31 @@
+services:
+  worker:
+    image: openledgerhub/worker:1.0.0
+    ports:
+      - "8081:8080"  # 将主机端口映射到 8081
+      - "5555:5555"
+    volumes:
+      - ./config.yaml:/app/config.yaml
+      - ./keystore/keystore.json:/app/keystore.json
+      - /etc/machine-id:/etc/machine-id  # 挂载主机的 /etc/machine-id
+    env_file:
+      - .env
+    restart: always  # 添加自动重启策略
+    networks:
+      - worker-network
+
+  scraper:
+    image: openledgerhub/scraper:1.0.0
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - worker
+    restart: always
+    networks:
+      - worker-network
+
+networks:
+  worker-network:
+    name: worker-network
