@@ -64,7 +64,7 @@ docker run -d -p 9000:9000 \
   -v portainer_data:/data \
   portainer/portainer-ce
 
-安装 Chrome 容器
+# 安装 Chrome 容器
 echo "正在安装 Chromium 容器..."
 read -p "请输入访问Chrome浏览器的用户名: " CUSTOM_USER
 read -sp "请输入访问Chrome浏览器的密码: " PASSWORD
