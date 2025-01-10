@@ -15,10 +15,10 @@
 
 定时重启命令，一小时重启一次
 
-执行```corntab -e```
+执行```crontab -e```
 
 写入 ```0 * * * * docker restart opl-worker-1 && docker restart opl-scraper-1```
 
 保存
 
-执行```corntab -l``` 查看是否写入成功
+执行```crontab -l``` 查看是否写入成功
