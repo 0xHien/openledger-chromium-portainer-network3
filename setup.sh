@@ -9,7 +9,7 @@ echo "=============================================="
 
 set -e  # 如果有错误立即退出
 sleep 5
-安装 Docker
+# 安装 Docker
 echo "正在安装 Docker..."
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
