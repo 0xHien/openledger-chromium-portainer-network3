@@ -44,43 +44,8 @@ cd /home/openledger/.config/opl
 
 # 启动 Docker Compose 项目
 echo "启动 Docker Compose 项目..."
-# docker-compose up -d
+docker-compose up -d
 
-
-# 检查 Docker 网络是否存在
-NETWORK_NAME="worker-network"
-NETWORK_EXISTS=$(docker network ls --filter name="^${NETWORK_NAME}$" -q)
-
-if [ -z "$NETWORK_EXISTS" ]; then
-    echo "网络 $NETWORK_NAME 不存在，正在创建..."
-    docker network create $NETWORK_NAME
-    echo "网络 $NETWORK_NAME 创建成功。"
-else
-    echo "网络 $NETWORK_NAME 已存在。"
-fi
-sleep 5
-
-docker run -d \
-  --name worker \
-  -p 8081:8080 \
-  -p 5555:5555 \
-  -v ./config.yaml:/app/config.yaml \
-  -v ./keystore/keystore.json:/app/keystore.json \
-  -v /etc/machine-id:/etc/machine-id \
-  --env-file .env \
-  --restart always \
-  --network worker-network \
-  openledgerhub/worker:1.0.0
-
-# 启动 scraper 服务
-docker run -d \
-  --name scraper \
-  -p 8000:8000 \
-  -e PYTHONUNBUFFERED=1 \
-  --restart always \
-  --network worker-network \
-  --link worker \
-  openledgerhub/scraper:1.0.0
 
 
 sleep 5
