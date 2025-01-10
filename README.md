@@ -20,3 +20,5 @@
 写入 ```0 * * * * docker restart opl-worker-1 && docker restart opl-scraper-1```
 
 保存
+
+执行```corntab -l``` 查看是否写入成功
